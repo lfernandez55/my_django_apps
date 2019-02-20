@@ -10,9 +10,9 @@
             {{ form.as_p }}
 
             <table class="table">
-                {{ familymembers.management_form }}
+                {{ tasks.management_form }}
 
-                {% for form in familymembers.forms %}
+                {% for form in tasks.forms %}
                     {% if forloop.first %}
                         <thead>
                         <tr>
@@ -38,7 +38,7 @@
                     </tr>
                 {% endfor %}
             </table>
-            <input type="submit" value="Save"/> <a href="{% url 'profile-list' %}">back to the list</a>
+            <input type="submit" value="Save"/> <a href="{% url 'taskgroup_list' %}">back to the list</a>
         </form>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

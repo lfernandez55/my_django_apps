@@ -1,13 +1,13 @@
 from django.forms import ModelForm, inlineformset_factory
-
-from .models import TaskGroup, FamilyMember
+from django import forms
+from .models import TaskGroup, Task
 
 
 class TaskGroupForm(ModelForm):
     class Meta:
         model = TaskGroup
+        widgets = {'author': forms.HiddenInput}
         exclude = ()
-
 
 class TaskGroupTaskForm(ModelForm):
     class Meta:
