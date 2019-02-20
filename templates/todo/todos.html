@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active"><a href="{% url 'todo:index' %}">Todo Home</a> / <a href="{% url 'todo:all_todo_groups' %}">My Todo Groups</a> / {{todo_group_name}}</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="mb-4">
+  <a href="{% url 'todo:new_todo' todo_group_id %}" class="btn btn-primary">New Todo  </a>
+  <a href="{% url 'todo:manage_group_of_todos' todo_group_id %}" class="btn btn-primary">Save</a>
+</div>
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Todo Name</th>
+      <th>Finished</th>
+      <th>Sequence</th>
+      <th>PK</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for todo in todos %}
+      <tr>
+        <td>{{ todo.label }}</td>
+        <td>
+          <input type="checkbox"
+          {% if todo.finished  %}
+            checked
+          {% endif %}
+          value="{{ todo.pk }}" name="finished"
+          >
+        </td>
+        <td>{{ todo.sequence }}</td>
+        <td>{{ todo.pk }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

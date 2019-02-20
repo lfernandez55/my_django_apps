@@ -1,0 +1,18 @@
+{% extends 'u2/base_foo.html' %}
+
+{% load static %}
+
+{% block second_nav %}
+  <h2>Overriding My Second Nav</h2>
+  <a href="{% static 'bar.html' %}">Go to bar.html (using static set in settings)</a><br>
+{% endblock second_nav %}
+
+{% block body %}
+   <h3>My Foo Page</h3>
+   <h4>{{ myString }}</h4>
+   <h4>{{ phrases }}</h4>
+   {% for phrase in phrases  %}
+     <p>{{ phrase }}</p>
+     {% if phrase == 'two turtle doves' %} YES DOVES! {% endif %}
+   {% endfor %}
+{% endblock body %}

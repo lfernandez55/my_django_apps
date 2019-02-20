@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">
+    <a href="{% url 'todo:index' %}">Todo Home</a> /
+    <a href="{% url 'todo:all_todo_groups' %}">My Todo Groups</a> /
+    <a href="{% url 'todo:todos_by_group' todo_group.id %}">{{todo_group.name}}</a> /
+    Create Todos
+  </li>
+{% endblock %}
+
+
+{% block content %}
+{% if heading %}
+<h3>{{heading}}</h3>
+{% endif %}
+<form class="form-horizontal" method="POST" action="">
+    {% csrf_token %}
+{{ formset.management_form }}
+{% for form in formset %}
+<div class="row form-row spacer">
+    <div class="col-2">
+        <label>{{form.label.label}}</label>
+    </div>
+    <div class="col-4">
+        <div class="input-group">
+            {{form.label}} 
+            <div class="input-group-append">
+                <button class="btn btn-success add-form-row">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div class="row spacer">
+    <div class="col-4 offset-2">
+        <button type="submit" class="btn btn-block btn-primary">Create</button>
+    </div>
+</div>
+</form>
+{% endblock %}

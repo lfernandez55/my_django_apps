@@ -1,0 +1,18 @@
+.navbar-brand {
+  font-family: 'Peralta', cursive;
+}
+.spacer{
+  margin-top:3px;
+}
+th, td{
+  text-align:center;
+
+}
+/* table{
+  border-collapse: collapse;
+  display: inline;
+}
+thead{
+  background: black;
+  color: white;
+} */

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">
+    <a href="{% url 'todo:index' %}">Todo Home</a> /
+    My Todo Groups
+  </li>
+{% endblock %}
+
+{% block content %}
+<!-- You can dump the entire object that is passed to this template using the following line:
+{{groups_and_todos_list}} -->
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Todo Name</th>
+      <th>Finished</th>
+      <th>Todo Group</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for group_and_todo in groups_and_todos_list %}
+      <tr>
+        <td>{{ group_and_todo.label }}</td>
+        <td>{{ group_and_todo.finished }}</td>
+        <td>{{ group_and_todo.todo_group__name }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,11 @@
+<h3>Presentations Template Here</h3>
+
+<table>
+{% for presentation in presentation_list %}
+  <tr>
+    <td>{{ presentation.description }}</td>
+    <td>{{ presentation.email }}</td>
+    <td>{{ presentation.created_at }}</td>
+  </tr>
+{% endfor %}
+</table>

@@ -1,0 +1,17 @@
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Conference App{% endblock %}</title>
+  </head>
+  <body>
+    {% block mynav %}
+      <h1>My First Nav</h1><!-- HERE -->
+    {% endblock mynav %}
+    {% block second_nav %}
+      <h2>My Second Nav</h2><!-- HERE -->
+    {% endblock second_nav %}
+    {% block body %}
+    {% endblock body %}  <!-- AND HERE -->
+  </body>
+</html>

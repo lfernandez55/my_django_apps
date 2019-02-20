@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active"><a href="{% url 'todo:index' %}">Todo Home</a></li>
+{% endblock %}
+
+
+{% block content %}
+<a href="todogroups/">View Your Todo Groups</a><br>
+<a href="groups_and_todos/">View All Your Todos (By Group)</a><br>
+{% endblock %}

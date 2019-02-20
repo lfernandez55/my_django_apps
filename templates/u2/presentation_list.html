@@ -1,0 +1,6 @@
+{% block content %}
+    <h2>Presentation content</h2>
+        {% for ob in object_list %}
+            <p>{{ ob.description }}   {{ ob.created_at }} {{ob.email}}</p>
+        {% endfor %}
+{% endblock %}

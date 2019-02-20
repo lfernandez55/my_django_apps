@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active"><a href="{% url 'todo:index' %}">Todo Home</a> / My Todo Groups</li>
+{% endblock %}
+
+{% block content %}
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Todo Group Name</th>
+      <th>Description</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for todo_group in todo_group_list %}
+      <tr>
+        <td><a href="{% url 'todo:todos_by_group' todo_group.id %}">{{ todo_group.name }}</a> </td>
+        <td>{{ todo_group.description }}</td>
+        <td>{{ todo_group.author }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
