@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_tasks.html" %}
 {% load static %}
 {% block title %}Task App{% endblock %}
 {% block breadcrumb %}
@@ -8,12 +8,13 @@
   </li>
 {% endblock %}
 {% block content %}
-    <h2>Profile</h2>
+    <h2>Task Group</h2>
     <hr>
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form action="" method="post">{% csrf_token %}
-            {{ form.as_p }}
-
+          <table id="firstTable">
+            {{ form.as_table }}
+          </table>
             <table class="table">
                 {{ tasks.management_form }}
 
@@ -27,6 +28,7 @@
                         </tr>
                         </thead>
                     {% endif %}
+                    {#Comment:  form_set row is needed by the jquery plug in to add or remove rows #}
                     <tr class="{% cycle row1 row2 %} formset_row">
                         {% for field in form.visible_fields %}
                             <td>
@@ -50,9 +52,14 @@
     <script src="{% static 'formset/jquery.formset.js' %}"></script>
     <script type="text/javascript">
         $('.formset_row').formset({
-            addText: 'add family member',
+            addText: 'add task',
             deleteText: 'remove',
-            prefix: 'familymember_set'
+            prefix: 'taskgroup_set'
         });
     </script>
+    <style>
+      #firstTable th {text-align:left}
+      #firstTable  > tbody > tr + tr + tr {display:none}
+      .dynamic-form-add td {text-align:left}
+    </style>
 {% endblock %}

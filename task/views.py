@@ -5,7 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.db import transaction
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.shortcuts import redirect
-from .models import TaskGroup
+from .models import TaskGroup, Task
 from .forms import TaskFormSet
 from django.contrib.auth.models import User
 
@@ -34,6 +34,7 @@ class TaskgroupTaskCreate(CreateView):
             data['tasks'] = TaskFormSet(self.request.POST)
         else:
             data['tasks'] = TaskFormSet()
+
         return data
 
     def form_valid(self, form):
@@ -67,7 +68,11 @@ class TaskgroupTaskUpdate(UpdateView):
         if self.request.POST:
             data['tasks'] = TaskFormSet(self.request.POST, instance=self.object)
         else:
+            # querytasks = Task.objects.all().order_by('-sequence')
+            # querytasks = TaskGroup.objects.all().filter(author=self.request.user).order_by('-task_group_name')
+            # data['tasks'] = TaskFormSet(queryset=querytasks)
             data['tasks'] = TaskFormSet(instance=self.object)
+
         return data
 
     def form_valid(self, form):
