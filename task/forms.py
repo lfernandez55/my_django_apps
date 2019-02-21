@@ -4,12 +4,13 @@ from .models import TaskGroup, Task
 
 
 class TaskGroupForm(ModelForm):
+
     class Meta:
         model = TaskGroup
-        widgets = {'author': forms.HiddenInput}
         exclude = ()
 
 class TaskGroupTaskForm(ModelForm):
+
     class Meta:
         model = Task
         exclude = ()

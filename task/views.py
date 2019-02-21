@@ -12,10 +12,14 @@ from django.contrib.auth.models import User
 class TaskgroupList(ListView):
     model = TaskGroup
 
-# class TaskgroupCreate(CreateView):
-#     model = TaskGroup
-#     fields = ['task_group_name', 'description']
-#
+    def get_queryset(self):
+        queryset = TaskGroup.objects.all().filter(author=self.request.user).order_by('-task_group_name')
+        return queryset
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(TaskgroupList, self).get_context_data(**kwargs)
+    #     context['tags'] = Tag.objects.all()
+    #     return context
 
 class TaskgroupTaskCreate(CreateView):
     print('debug')
@@ -33,7 +37,6 @@ class TaskgroupTaskCreate(CreateView):
         return data
 
     def form_valid(self, form):
-        print('debug here', self.request.user)
         context = self.get_context_data()
         tasks = context['tasks']
         with transaction.atomic():
@@ -76,7 +79,6 @@ class TaskgroupTaskUpdate(UpdateView):
             if tasks.is_valid():
                 tasks.instance = self.object
                 tasks.save()
-        # return super(TaskgroupTaskCreate, self).form_valid(form)
         return super().form_valid(form)
 
 
@@ -85,6 +87,7 @@ class TaskgroupDelete(DeleteView):
     model = TaskGroup
     success_url = reverse_lazy('taskgroup_list')
 
+# these might come in handy in the future if i want to move to function based views
 # def TaskgroupDelete(request, taskgroup_id, template_name='task/taskgroup_confirm_delete.html'):
 #     taskgroup= get_object_or_404(TaskGroup, pk=taskgroup_id)
 #     if request.method=='POST':
@@ -102,12 +105,4 @@ class TaskgroupDelete(DeleteView):
 #         else:
 #             print('NOT VALID', formset.errors)
 #     formset = TaskFormSet()
-#     print('dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
-#
 #     return render(request, "task/taskgroup_form.html", {"formset": formset })
-
-
-
-# def TaskgroupTaskCreate(request, Taskgroup_id):
-#     tasks = TaskFormSet()
-#     return render(request, 'todo/todoset.html', { 'tasks': tasks })

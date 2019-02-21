@@ -1,6 +1,11 @@
 {% extends "base.html" %}
-
-{% block title %}{% endblock %}
+{% block title %}Task App{% endblock %}
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">
+    <a href="{% url 'taskgroup_list' %}">Tasks Home</a> /
+    Delete Task
+  </li>
+{% endblock %}
 {% block content %}
     <h2></h2>
     <hr>
