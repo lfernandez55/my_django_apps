@@ -1,0 +1,34 @@
+<h1>q1:</h1>
+{{q1}}
+<h3>for loop</h3>
+{% for task in q1 %}
+  ++++  {{ task.task_name }} {{ task.Task_group }} {{ task.Task_group.author }} {{ task.Task_group.author.email }}<br>
+{% endfor %}
+<br><br>ddddddddddddddddddddddddddddddddddddddd<br>
+{% for field in q1 %}
+    {{ field.name }} {{ field.name }}<br>
+{% endfor %}
+
+
+<h1>q2:</h1>
+{{q2}}
+<h3>for loop</h3>
+{% for task in q2 %}
+  ++++  {{ task.task_name }} {{ task.Task_group }} {{ task.Task_group.author }} {{ task.Task_group.author.email }}<br>
+{% endfor %}
+<br><br>ddddddddddddddddddddddddddddddddddddddd<br>
+{% for field in q2 %}
+    {{ field.name }} {{ field.name }}<br>
+{% endfor %}
+
+
+
+
+<h1>A semblance of how to use this view, query and template to output the same inline form used elsewhere in this app:</h1>
+
+{{ q1.0.Task_group }}<br>
+{{ q1.0.Task_group.description }}<br><br>
+<hr>
+{% for task in q1 %}
+  {{ task.task_name }} {{ task.sequence }} <br>
+{% endfor %}
