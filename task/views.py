@@ -64,6 +64,15 @@ class TaskgroupTaskUpdate(UpdateView):
     success_url = reverse_lazy('taskgroup_list')
 
     def get_context_data(self, **kwargs):
+        #     # here is some good documentaton on get_context_data,
+        # https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
+        # it's used to compute/populate the form
+        #     # here im needing to override it on the get call because I want to order the tasks by the sequence
+        #     #field.  The View (e.g. UpdateView) isn't smart enough to know on its own that this needs to be done
+        #     #notice that it is being called from form_valid which happens on POST
+        #     #but the get_context_data method also seems to run automatically on getself.
+        #     #the data object that is returned
+        #     #from the method is needed on post to save the model and on get to create the form
         data = super(TaskgroupTaskUpdate, self).get_context_data(**kwargs)
         if self.request.POST:
             data['tasks'] = TaskFormSet(self.request.POST, instance=self.object)
@@ -77,8 +86,14 @@ class TaskgroupTaskUpdate(UpdateView):
 
         return data
 
+
+
     def form_valid(self, form):
-        print('debug here', self.request.user)
+        # This method is called when valid form data has been POSTed.
+        # The default implementation for form_valid() simply redirects to the success_url.
+        # which in this case is the page that the user clicked on to get to this form.
+
+        print('debug herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrre', self.request.user)
         context = self.get_context_data()
         tasks = context['tasks']
         with transaction.atomic():
@@ -97,6 +112,7 @@ def foo(request):
     q1 = Task.objects.select_related('Task_group').filter(Task_group__task_group_name='Foo')
     q2 = Task.objects.filter(Task_group__task_group_name='Foo')
     #q2 = TaskGroup.objects.select_related('author')
+    print(dir(UpdateView))
     print(q1.query)
     print('-------------------------------------------------------------------')
     print(q2.query)
