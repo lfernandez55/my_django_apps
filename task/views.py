@@ -8,6 +8,8 @@ from django.shortcuts import redirect
 from .models import TaskGroup, Task
 from .forms import TaskFormSet
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 class TaskgroupList(ListView):
     model = TaskGroup
@@ -58,6 +60,7 @@ class TaskgroupUpdate(UpdateView):
     success_url = '/'
     fields = ['task_group_name', 'description']
 
+
 class TaskgroupTaskUpdate(UpdateView):
     model = TaskGroup
     fields = ['task_group_name', 'description','author']
@@ -81,12 +84,10 @@ class TaskgroupTaskUpdate(UpdateView):
             #the actual name of the TaskGroup is.
             #if one doesn't pass in the queryset the sequence wont be ordered.  This is
             #the only reason it's being passed in.
-            querytasks = Task.objects.filter(Task_group__task_group_name=self.object).order_by('-sequence')
+            querytasks = Task.objects.filter(Task_group__author=self.request.user).filter(Task_group__task_group_name=self.object).order_by('-sequence')
             data['tasks'] = TaskFormSet(instance=self.object,queryset=querytasks)
 
         return data
-
-
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
