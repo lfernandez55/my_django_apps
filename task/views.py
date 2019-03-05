@@ -9,8 +9,10 @@ from .models import TaskGroup, Task
 from .forms import TaskFormSet
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from .decorators import user_is_taskgroup_author
 
-
+@method_decorator(login_required, name='dispatch')
 class TaskgroupList(ListView):
     model = TaskGroup
 
@@ -23,6 +25,7 @@ class TaskgroupList(ListView):
     #     context['tags'] = Tag.objects.all()
     #     return context
 
+@method_decorator(login_required, name='dispatch')
 class TaskgroupTaskCreate(CreateView):
     print('debug')
     model = TaskGroup
@@ -60,7 +63,7 @@ class TaskgroupUpdate(UpdateView):
     success_url = '/'
     fields = ['task_group_name', 'description']
 
-
+@method_decorator(user_is_taskgroup_author, name='dispatch')
 class TaskgroupTaskUpdate(UpdateView):
     model = TaskGroup
     fields = ['task_group_name', 'description','author']
@@ -104,6 +107,7 @@ class TaskgroupTaskUpdate(UpdateView):
                 tasks.save()
         return super().form_valid(form)
 
+@user_is_taskgroup_author
 def foo(request):
     #there doesn't seem to be any difference between what is output by q1 or q2 even
     #though their sql is different when it is dumped out with the print statments below.

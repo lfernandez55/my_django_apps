@@ -14,4 +14,4 @@ def login_logout_resources(request):
     return render(request, 'registration/resources.html');
 
 def warning(request):
-        return render(request, 'u2/warning.html')
+        return render(request, 'warning.html')
