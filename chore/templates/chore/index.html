@@ -1,0 +1,31 @@
+{% extends "base_tasks.html" %}
+
+{% block stylesheet %}
+{% endblock %}
+{% block title %}Chore App{% endblock %}
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">
+    Chores Home
+  </li>
+{% endblock %}
+{% block content %}
+<h2>My chore groups: </h2>
+<div>
+    <ul>
+        {% for choregroup in choregroups %}
+            <li>{{ choregroup.choregroup_name }} ( {{ choregroup.description }} ) | <a
+                    href="{% url 'choregroup_update' choregroup.pk %}">edit</a>
+                    <a href="{% url 'choregroup_delete' choregroup.pk %}">delete</a>
+            </li>
+        {% empty %}
+            <li>No choregroups defined yet.</li>
+        {% endfor %}
+
+    </ul>
+    <p>
+      <a href="{% url 'choregroup_create' %}">add a choregroup</a>
+    </p>
+</div>
+
+
+{% endblock %}

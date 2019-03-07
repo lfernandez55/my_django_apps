@@ -29,6 +29,7 @@ urlpatterns = [
     path('u2/', include('u2.urls')),
     path('todo/', include('todo.urls')),
     path('task/', include('task.urls')),
+    path('chore/', include('chore.urls')),
 
     path('login_logout_resources/', views.login_logout_resources, name='login_logut_resources'),
 
