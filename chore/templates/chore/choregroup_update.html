@@ -4,7 +4,12 @@
 {% block breadcrumb %}
 <li class="breadcrumb-item active">
   <a href="{% url 'choregroup_list' %}">Chore Home</a> /
-  Manage Task
+  Update Choregroup
+
+  <br><br>{{choregroup.0.choregroup_name}}<br><br>
+  {% for key in choregroup %}
+    ----{{key.choregroup_name}} {{key.description}} {{key.Chore__chore_name}}<br>
+  {% endfor %}
 </li>
 {% endblock %}
 {% block content %}
@@ -16,11 +21,11 @@
     <table id="firstTable">
       <tr>
         <th><label for="id_choregroup_name">Chore group name:</label></th>
-        <td><input type="text" name="choregroup_name" maxlength="30" required id="id_choregroup_name" value="MyChoreGroupNameDDDD"></td>
+        <td><input type="text" name="choregroup_name" maxlength="30" required id="id_choregroup_name" value="{{choregroup.0.choregroup_name}}"></td>
       </tr>
       <tr>
         <th><label for="id_description">Description:</label></th>
-        <td><input type="text" name="description" maxlength="100" required id="id_description" value="MyChoreGroupDescZZZZ"></td>
+        <td><input type="text" name="description" maxlength="100" required id="id_description" value="{{choregroup.0.description}}"></td>
       </tr>
     </table>
     <table class="table">
