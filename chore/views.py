@@ -60,9 +60,10 @@ def choregroupUpdate(request, pk):
                     chore.save()
             #TODO add new chores
             if formField.startswith('newchore_name'):
-                choreId=formField.split("_")[2]
-                sequence='newchore_sequence_' + choreId
-                newChore = Chore(chore_name=request.POST[formField], sequence=sequence)
+                newChoreId=formField.split("_")[2]
+                sequenceField='newchore_sequence_' + newChoreId
+                print('ddddddd',sequenceField)
+                newChore = Chore(chore_name=request.POST[formField], sequence=request.POST[sequenceField],choregroup=choregroup)
                 newChore.save()
                 chore.chore_name=request.POST[formField]
 
