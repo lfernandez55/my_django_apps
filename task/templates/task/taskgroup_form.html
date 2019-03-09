@@ -48,6 +48,9 @@
             <input type="submit" value="Save"/> <a href="{% url 'taskgroup_list' %}">back to the list</a>
         </form>
     </div>
+    <div>TODO:  One can only add one new task.  This is because the add task button doesn't add
+    the right attributes to the new element that has been added to the screen.  The tasks.management_form
+    might also need to be updated. I might just strip out the javascript library and write your own</div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- See: https://github.com/elo80ka/django-dynamic-formset -->
     <script src="{% static 'formset/jquery.formset.js' %}"></script>

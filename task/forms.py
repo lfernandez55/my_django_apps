@@ -3,11 +3,11 @@ from django import forms
 from .models import TaskGroup, Task
 
 
-class TaskGroupForm(ModelForm):
-
-    class Meta:
-        model = TaskGroup
-        exclude = ()
+# class TaskGroupForm(ModelForm):
+#
+#     class Meta:
+#         model = TaskGroup
+#         exclude = ()
 
 class TaskGroupTaskForm(ModelForm):
 
