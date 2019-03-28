@@ -55,6 +55,10 @@ class NewPresentationForm(forms.ModelForm):
             raise ValidationError("You may not use lfernandez@weber.edu!!")
         return email
 
+
+class MySimpleForm(forms.Form):
+    firstname = forms.CharField(max_length=100)
+    lastname = forms.CharField(max_length=50)
     # use something like this for validating codependent fields
     # see https://stackoverflow.com/questions/7948750/custom-form-validation
     # def clean(self):

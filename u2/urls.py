@@ -7,7 +7,7 @@ urlpatterns = [
     # ex: /polls/
     path('', views.index, name='index'),
     path('foo/', views.foo, name='foo'),
-
+    path('formfiddle/', views.formfiddle, name='formfiddle'),
     path('apply/', views.apply, name='new_presentation'),
     path('new_presentation_a/', views.new_presentation_a, name='new_presentation_a'),
     path('new_presentation_diff_formats/', views.new_presentation_diff_formats, name='new_presentation_diff_formats'),

@@ -107,7 +107,7 @@ class TaskgroupTaskUpdate(UpdateView):
                 tasks.save()
         return super().form_valid(form)
 
-@user_is_taskgroup_author
+# @user_is_taskgroup_author
 def foo(request):
     #there doesn't seem to be any difference between what is output by q1 or q2 even
     #though their sql is different when it is dumped out with the print statments below.
@@ -128,11 +128,11 @@ def foo(request):
 
     return render(request, 'task/foo.html', {'q1':q1,'q2':q2 })
 
-# def foo(request):
-#     myString="foo"
-#     print('dddddddddddddddddddddebug')
-#     phrases = ['three french hens','two turtle doves','a partridge in a pear tree']
-#     return TemplateResponse(request, 'u2/foo.html', { 'myString': myString, 'phrases': phrases })
+def baz(request):
+    myString="foo"
+    print('dddddddddddddddddddddebug')
+    phrases = ['three french hens','two turtle doves','a partridge in a pear tree']
+    return render(request, 'task/baz.html', { 'myString': myString, 'phrases': phrases })
 
 
 class TaskgroupDelete(DeleteView):

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import NewPresentationForm
+from .forms import NewPresentationForm, MySimpleForm
 from .models import Presentation
 from django.template.response import TemplateResponse
 from django.views import generic
@@ -95,3 +95,10 @@ def email(request):
     recipient_list = ['luke.fernandez@gmail.com',]
     send_mail( subject, message, email_from, recipient_list )
     return TemplateResponse(request, 'u2/email.html')
+
+def formfiddle(request):
+    form = MySimpleForm({'firstname':'luke', 'lastname':'fern'})
+
+    # error = form.is_valid()
+    # print('dddd',error)
+    return render(request,'u2/formfiddle.html', {'form':form})
